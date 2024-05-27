@@ -27,6 +27,7 @@ export const userSlice = createSlice({
         state.isFetchingUserData = true;
       },
     ),
+      
       //FULFILLED
       builder.addMatcher(
         action =>
@@ -36,14 +37,15 @@ export const userSlice = createSlice({
           try {
             state.isFetchingUserData = false;
             if (action.payload && Object.keys(action.payload).length > 0) {
-              const {age, displayName, job, userId} = action.payload;
-              state.userData = {age, displayName, job, userId};
+              const {age, displayName, job, userId, photoURL} = action.payload;
+              state.userData = {age, displayName, job, userId, photoURL};
             }
           } catch (e) {
             console.log(e);
           }
         },
       ),
+
       //REJECTED
       builder.addMatcher(
         action =>

@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setFireBaseUser} from '../redux/reducers/user';
 import {useEffect} from 'react';
 import auth from '@react-native-firebase/auth';
+import MatchedScreen from './MatchedScreen';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,10 @@ export default function StackScreen() {
               options={{presentation: 'modal'}}
             />
           </Stack.Group>
+          <Stack.Screen
+            name="matchedScreen"
+            component={MatchedScreen}
+            options={{presentation: 'transparentModal'}}></Stack.Screen>
         </>
       ) : (
         <Stack.Screen name="loginScreen" component={LoginScreen} />

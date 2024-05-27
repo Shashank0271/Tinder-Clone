@@ -1,6 +1,5 @@
 import {createAsyncThunk, isRejectedWithValue} from '@reduxjs/toolkit';
 import firestore from '@react-native-firebase/firestore';
-import {firebase} from '@react-native-firebase/auth';
 
 export const fetchHomePageUsers = createAsyncThunk(
   'fetchHomePageUsersData',
@@ -25,7 +24,7 @@ export const fetchHomePageUsers = createAsyncThunk(
         );
 
       if (likedUserIds.length === 0) {
-        likedUserIds = ['testing'];
+        likedUserIds = ['testing']; //since the list cant be empty in "where" filter
       }
 
       if (passedUserIds.length === 0) {
@@ -53,42 +52,40 @@ export const fetchHomePageUsers = createAsyncThunk(
   },
 );
 
-export const addToLikedUsers = createAsyncThunk(
-  'addToLikedUsers',
-  async ({likedUser, firebaseUid}, {rejectWithValue}) => {
-    try {
-      await firestore()
-        .collection('Users')
-        .doc(firebaseUid)
-        .collection('liked')
-        .doc(likedUser.userId)
-        .set(likedUser);
-    } catch (e) {
-      return rejectWithValue(
-        'error in adding user to liked : ---> \t',
-        e.toString(),
-      );
-    }
-  },
-);
+// export const addToLikedUsers = createAsyncThunk(
+//   'addToLikedUsers',
+//   async ({likedUser, firebaseUid}, {rejectWithValue}) => {
+//     try {
+//       await firestore()
+//         .collection('Users')
+//         .doc(firebaseUid)
+//         .collection('liked')
+//         .doc(likedUser.userId)
+//         .set(likedUser);
+//     } catch (e) {
+//       return rejectWithValue(
+//         'error in adding user to liked : ---> \t',
+//         e.toString(),
+//       );
+//     }
+//   },
+// );
 
-export const addToPassedUsers = createAsyncThunk(
-  'addToPassedUsers',
-  async ({passedUser, firebaseUid}, {rejectWithValue}) => {
-    try {
-      await firestore()
-        .collection('Users')
-        .doc(firebaseUid)
-        .collection('passed')
-        .doc(passedUser.userId)
-        .set(passedUser);
-    } catch (e) {
-      return rejectWithValue(
-        'error in adding user to liked : ---> \t',
-        e.toString(),
-      );
-    }
-  },
-);
-
-export const createMatch = createAsyncThunk('createMatch', async () => {});
+// export const addToPassedUsers = createAsyncThunk(
+//   'addToPassedUsers',
+//   async ({passedUser, firebaseUid}, {rejectWithValue}) => {
+//     try {
+//       await firestore()
+//         .collection('Users')
+//         .doc(firebaseUid)
+//         .collection('passed')
+//         .doc(passedUser.userId)
+//         .set(passedUser);
+//     } catch (e) {
+//       return rejectWithValue(
+//         'error in adding user to liked : ---> \t',
+//         e.toString(),
+//       );
+//     }
+//   },
+// );
