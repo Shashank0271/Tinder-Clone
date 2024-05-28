@@ -1,4 +1,4 @@
-import {createAsyncThunk, isRejectedWithValue} from '@reduxjs/toolkit';
+import {createAsyncThunk} from '@reduxjs/toolkit';
 import firestore from '@react-native-firebase/firestore';
 
 export const fetchHomePageUsers = createAsyncThunk(
@@ -52,40 +52,3 @@ export const fetchHomePageUsers = createAsyncThunk(
   },
 );
 
-// export const addToLikedUsers = createAsyncThunk(
-//   'addToLikedUsers',
-//   async ({likedUser, firebaseUid}, {rejectWithValue}) => {
-//     try {
-//       await firestore()
-//         .collection('Users')
-//         .doc(firebaseUid)
-//         .collection('liked')
-//         .doc(likedUser.userId)
-//         .set(likedUser);
-//     } catch (e) {
-//       return rejectWithValue(
-//         'error in adding user to liked : ---> \t',
-//         e.toString(),
-//       );
-//     }
-//   },
-// );
-
-// export const addToPassedUsers = createAsyncThunk(
-//   'addToPassedUsers',
-//   async ({passedUser, firebaseUid}, {rejectWithValue}) => {
-//     try {
-//       await firestore()
-//         .collection('Users')
-//         .doc(firebaseUid)
-//         .collection('passed')
-//         .doc(passedUser.userId)
-//         .set(passedUser);
-//     } catch (e) {
-//       return rejectWithValue(
-//         'error in adding user to liked : ---> \t',
-//         e.toString(),
-//       );
-//     }
-//   },
-// );

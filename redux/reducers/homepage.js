@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchHomePageUsers} from '../apiCalls/allUsers';
+import {fetchHomePageUsers} from '../apiCalls/homepage';
 
 const initialState = {
   allUsersList: [],
@@ -12,6 +12,7 @@ const allUsersSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
+    //Handle HOME-PAGE users
     builder.addCase(fetchHomePageUsers.pending, (state, action) => {
       state.fetchingAllUsersData = true;
       state.fetchingAllUsersDataError = false;

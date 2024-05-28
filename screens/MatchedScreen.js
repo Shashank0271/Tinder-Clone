@@ -1,11 +1,13 @@
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import React from 'react';
 import {useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 export default function MatchedScreen() {
+  const navigation = useNavigation();
   const route = useRoute();
   const {currentUser, likedUser} = route.params;
-  console.log(currentUser, likedUser);
+
   return (
     <View style={styles.screen}>
       <Image
@@ -23,15 +25,12 @@ export default function MatchedScreen() {
 
       <TouchableOpacity
         onPress={() => {
-          // go to chat screen
+          navigation.navigate('chatScreen');
         }}
         style={styles.button}>
-        <View>
-          <Text
-            style={{color: 'black', alignSelf: 'center', fontWeight: 'bold'}}>
-            Send a message
-          </Text>
-        </View>
+        <Text style={{color: 'black', alignSelf: 'center', fontWeight: 'bold'}}>
+          Send a message
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: 'red',
-    opacity: 0.7,
+    opacity: 0.75,
     justifyContent: 'center',
     alignItems: 'center',
   },
