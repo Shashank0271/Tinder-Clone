@@ -44,6 +44,7 @@ export const addToLikedUsers = createAsyncThunk(
                   [likedUserId]: likedUser,
                 },
                 usersMatched: [currentUserId, likedUserId],
+                matchId,
                 timestamp: firestore.FieldValue.serverTimestamp(),
               })
               //update the state to matched
@@ -65,5 +66,3 @@ export const addToLikedUsers = createAsyncThunk(
     }
   },
 );
-
-

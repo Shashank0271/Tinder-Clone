@@ -1,13 +1,14 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './HomeScreen';
 import LoginScreen from './LoginScreen';
-import ChatScreen from './ChatScreen';
+import ChatScreen from './Chat/ChatScreen';
 import ModalScreen from './ModalScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import {setFireBaseUser} from '../redux/reducers/user';
 import {useEffect} from 'react';
 import auth from '@react-native-firebase/auth';
 import MatchedScreen from './MatchedScreen';
+import MessageScreen from './Message/MessageScreen';
 
 const Stack = createStackNavigator();
 
@@ -42,7 +43,9 @@ export default function StackScreen() {
           <Stack.Screen
             name="matchedScreen"
             component={MatchedScreen}
-            options={{presentation: 'transparentModal'}}></Stack.Screen>
+            options={{presentation: 'transparentModal'}}
+          />
+          <Stack.Screen name="messageScreen" component={MessageScreen} />
         </>
       ) : (
         <Stack.Screen name="loginScreen" component={LoginScreen} />

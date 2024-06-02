@@ -15,7 +15,7 @@ import {
 } from 'react-native-heroicons/solid';
 import {useNavigation} from '@react-navigation/native';
 import Swiper from 'react-native-deck-swiper';
-import {useRef, useEffect} from 'react';
+import {useRef, useEffect, useState} from 'react';
 import {fetchCurrentUserData} from '../redux/apiCalls/user';
 import {fetchHomePageUsers} from '../redux/apiCalls/homepage';
 import {addToLikedUsers} from '../redux/apiCalls/like';
@@ -32,8 +32,10 @@ export default function HomeScreen() {
   const {allUsersList, fetchingAllUsersData} = useSelector(
     ({allUsers}) => allUsers,
   );
+
   const {isLoadingLike, matched, likedUser} = useSelector(({like}) => like);
-  let swipedAll = false;
+  // const [swipedAll, setSwipedAll] = useState(allUsersList.length === 0);
+  // console.log(swipedAll);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -125,9 +127,10 @@ export default function HomeScreen() {
                 console.log(cardIndex);
               }}
               onSwipedAll={() => {
-                swipedAll = true;
+                // setSwipedAll(true);
               }}
               onSwipedRight={index => {
+                // if (!swipedAll) {
                 const currentCard = allUsersList[index];
                 dispatch(
                   addToLikedUsers({
@@ -135,13 +138,16 @@ export default function HomeScreen() {
                     currentUser: userData,
                   }),
                 );
+                // }
               }}
               onSwipedLeft={async index => {
+                // if (!swipedAll) {
                 const currentCard = allUsersList[index];
                 await addToPassedUsers({
                   passedUser: currentCard.data(),
                   firebaseUid: firebaseUser.uid,
                 });
+                // }
               }}
               verticalSwipe={false}
               cardIndex={0}
