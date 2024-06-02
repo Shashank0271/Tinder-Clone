@@ -1,11 +1,13 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {GoogleSignin} from '@react-native-community/google-signin';
 import auth from '@react-native-firebase/auth';
+import {WEB_CIENT_ID} from '@env';
+
+console.log(WEB_CIENT_ID);
 
 GoogleSignin.configure({
   offlineAccess: false,
-  webClientId:
-    '855218286662-mp35jj0nescjrkmjv1goe2i3gk3l94e7.apps.googleusercontent.com',
+  webClientId: 'WEB_CLIENT_ID_GOES_HERE',
   scopes: ['profile', 'email'],
 });
 

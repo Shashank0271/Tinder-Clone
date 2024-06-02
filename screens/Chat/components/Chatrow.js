@@ -15,17 +15,24 @@ export default function Chatrow({item}) {
       .orderBy('timeStamp', 'desc')
       .limit(1)
       .onSnapshot(
-        querySnapShot => {
-          const {message: lastMessage} = querySnapShot.docs[0]?.data();
-          setLastMessage(lastMessage);
+        querySnapshot => {
+          console.log('onSnapshot triggered');
+          if (!querySnapshot.empty) {
+            const doc = querySnapshot.docs[0];
+            const {message : lastMessage} = doc.data();
+            setLastMessage(lastMessage);
+          } 
         },
-        err => {
-          console.log(err);
+        error => {
+          console.error('Error fetching snapshot:', error);
         },
       );
-
-    return subscriber();
-  }, []);
+    // Cleanup function to unsubscribe from the listener
+    return () => {
+      console.log('Unsubscribing from snapshot listener');
+      subscriber();
+    };
+  }, [item.matchId]);
 
   return (
     <TouchableHighlight
