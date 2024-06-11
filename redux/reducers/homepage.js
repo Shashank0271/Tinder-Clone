@@ -10,7 +10,12 @@ const initialState = {
 const allUsersSlice = createSlice({
   name: 'allUserSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    setAllUsers: (state, action) => {
+      const userIndex = action.payload;
+      state.allUsersList.splice(userIndex, 1);
+    },
+  },
   extraReducers: builder => {
     //Handle HOME-PAGE users
     builder.addCase(fetchHomePageUsers.pending, (state, action) => {
@@ -29,4 +34,5 @@ const allUsersSlice = createSlice({
   },
 });
 
+export const {setAllUsers} = allUsersSlice.actions;
 export default allUsersSlice.reducer;

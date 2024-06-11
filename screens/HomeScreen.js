@@ -21,6 +21,7 @@ import {fetchHomePageUsers} from '../redux/apiCalls/homepage';
 import {addToLikedUsers} from '../redux/apiCalls/like';
 import {addToPassedUsers} from '../redux/apiCalls/pass';
 import {useDispatch, useSelector} from 'react-redux';
+import {setAllUsers} from '../redux/reducers/homepage';
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
@@ -125,6 +126,7 @@ export default function HomeScreen() {
               }}
               onSwiped={cardIndex => {
                 console.log(cardIndex);
+                dispatch(setAllUsers(cardIndex));
               }}
               onSwipedAll={() => {
                 // setSwipedAll(true);

@@ -27,7 +27,7 @@ const likeSlice = createSlice({
       state.likedUser = null;
     });
     builder.addCase(addToLikedUsers.fulfilled, (state, _) => {
-      isLoadingLike = false;
+      state.isLoadingLike = false;
     });
   },
 });

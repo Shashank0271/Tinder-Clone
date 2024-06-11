@@ -12,24 +12,24 @@ import firestore from '@react-native-firebase/firestore';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateCurrentUserData} from '../redux/apiCalls/user';
+import {firebase} from '@react-native-firebase/auth';
 
 export default function ModalScreen() {
   const dispatch = useDispatch();
-  const {isFetchingUserData} = useSelector(({user}) => user);
+  const {isFetchingUserData, firebaseUser} = useSelector(({user}) => user);
   const navigation = useNavigation();
-  const user = useSelector(state => state.user.userData);
-  const firebaseUser = useSelector(({user}) => user);
+  // const user = useSelector(state => state.user.userData);
   const [age, setAge] = useState(null);
   const [job, setJob] = useState(null);
   let incompleteForm = !age || !job;
-
+  console.log('FIREBASE USER : ', firebaseUser);
   async function submitForm() {
     dispatch(
       updateCurrentUserData({
-        userId: user.uid,
+        userId: firebaseUser.uid,
         age: age,
         job: job,
-        displayName: user.displayName,
+        displayName: firebaseUser.displayName,
         timeStamp: firestore.FieldValue.serverTimestamp(),
         photoURL: firebaseUser.photoURL,
       }),
@@ -56,7 +56,7 @@ export default function ModalScreen() {
             fontWeight: 'bold',
             marginBottom: 16,
           }}>
-          Welcome {user.displayName}
+          Welcome {firebaseUser.displayName}
         </Text>
         <Text style={{color: 'red', padding: 10}}>Step 1 : The job</Text>
 

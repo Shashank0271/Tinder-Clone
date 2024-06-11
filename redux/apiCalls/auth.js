@@ -7,7 +7,8 @@ console.log(WEB_CIENT_ID);
 
 GoogleSignin.configure({
   offlineAccess: false,
-  webClientId: 'WEB_CLIENT_ID_GOES_HERE',
+  webClientId:
+    '855218286662-mp35jj0nescjrkmjv1goe2i3gk3l94e7.apps.googleusercontent.com',
   scopes: ['profile', 'email'],
 });
 

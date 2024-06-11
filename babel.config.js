@@ -5,6 +5,6 @@ module.exports = {
       'module:react-native-dotenv',
       {moduleName: '@env', path: '.env', verbose: false},
     ],
-    '@babel/plugin-transfom-modules-commonjs',
+    // '@babel/plugin-transfom-modules-commonjs',
   ],
 };

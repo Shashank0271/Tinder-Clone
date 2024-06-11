@@ -27,7 +27,6 @@ export const userSlice = createSlice({
         state.isFetchingUserData = true;
       },
     ),
-      
       //FULFILLED
       builder.addMatcher(
         action =>
@@ -45,14 +44,13 @@ export const userSlice = createSlice({
           }
         },
       ),
-
       //REJECTED
       builder.addMatcher(
         action =>
           action.type === fetchCurrentUserData.rejected.type ||
           action.type === updateCurrentUserData.rejected.type,
         (state, action) => {
-          console.log('REJECTED----------------------WTF');
+          console.log('REJECTED----------------------WTF', action.payload);
           state.isFetchingUserData = false;
           state.fetchingDataError = true;
         },

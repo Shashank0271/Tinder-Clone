@@ -11,6 +11,7 @@ export const addToLikedUsers = createAsyncThunk(
   'addToLikedUsers',
   async ({likedUser, currentUser}, {rejectWithValue, dispatch}) => {
     try {
+      console.log('liked this user !');
       const {userId: likedUserId} = likedUser;
       const {userId: currentUserId} = currentUser;
 
@@ -20,7 +21,8 @@ export const addToLikedUsers = createAsyncThunk(
         .doc(currentUserId)
         .collection('liked')
         .doc(likedUserId)
-        .set(likedUser);
+        .set(likedUser)
+        .then(() => console.log('swipe recorded !'));
 
       //check if the other user has liked  you (you = the logged in user)
       await firestore()
@@ -32,7 +34,7 @@ export const addToLikedUsers = createAsyncThunk(
         .then(async documentSnapshot => {
           if (documentSnapshot.exists) {
             //its a MATCH !!!!!
-
+            console.log('its a match !');
             //create the match
             const matchId = generateMatchId(currentUserId, likedUserId);
             await firestore()
@@ -53,6 +55,7 @@ export const addToLikedUsers = createAsyncThunk(
 
             return likedUser;
           } else {
+            console.log('its not a match');
             //make sure the state is updated
             dispatch(setMatched({matched: false, likedUser: null}));
           }

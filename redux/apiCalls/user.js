@@ -25,7 +25,7 @@ export const updateCurrentUserData = createAsyncThunk(
     const {userId, age, job, displayName, timeStamp} = userProperties;
 
     try {
-      await firestore().collection('Users').doc(userId).update({
+      await firestore().collection('Users').doc(userId).set({
         userId,
         age,
         job,
@@ -40,9 +40,7 @@ export const updateCurrentUserData = createAsyncThunk(
 
       return updatedUser;
     } catch (e) {
-      return rejectWithValue('Failed to update user profile');
+      return rejectWithValue(e.toString());
     }
   },
 );
-
-
